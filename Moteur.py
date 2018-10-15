@@ -28,27 +28,42 @@ class Moteur:
         self.base_de_connaissance = base_de_connaissance
 
     def chainage_avant(self):
-        return
+	return
 
     def chainage_arriere(self):
         return
+'''
+chainage arriere (but)
+
+	sur une base de connaissance
+	
+
+'''
 
 
-print("coucou")
-p1 = Predicat("nuage")
-p2 = Predicat("soleil")
+
 
 
 '''
-class Fait:
-    def __init__(self, predicat):
-        self.predicat = predicat
-'''
+chainage avant
+	sur une base de fait
+	tant que ajout_regle ou que toutes les regles n'ont pas ete activées
+		chercher une regle qui peut etre appliquée
+			ajout_regle est vrai
+			ajout de la conclusion de la regle a la base de faits
+			regle.activee = vrai
 
-'''
-    base de connaissance
-        regles
-            dictionnaire avec le nom de la fonction en clé et les variables dans une liste en valeur
-        faits
-            dictionnaire avec 
+resultat lister tous les predicats atteints
+
+chainage avant (but)
+	sur une base de fait
+	tant que ajout_regle ou que toutes les regles n'ont pas ete activées ou que le but n'est pas atteint
+		chercher une regle qui peut etre appliquée
+			ajout_regle est vrai
+			ajout de la conclusion de la regle a la base de faits
+			regle.activee = vrai
+			si conclusion == but alors but_atteint = vrai
+
+resultat lister tous les predicats atteints
+
 '''
