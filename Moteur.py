@@ -10,8 +10,7 @@ class Predicat:
 
 class Condition:
     def __int__(self, predicat):
-        for p in predicat:
-            self.predicat = predicat
+	self.predicat = predicat
 
 
 class Regle: # premise : predicat , conclusion : liste de predicat
