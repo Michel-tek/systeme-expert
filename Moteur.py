@@ -1,36 +1,36 @@
 
 class Predicat:
-    def __init__(self, nom, variable=[]):
-        self.nom = nom
-        self.variable=variable
+	def __init__(self, nom, variable=[]):
+		self.nom = nom
+		self.variable=variable
 
-    def arite(self):
-        return len(self.variable)
+	def arite(self):
+		return len(self.variable)
 
 
 class Condition:
-    def __int__(self, predicat):
+	def __int__(self, predicat):
 	self.predicat = predicat
 
 
 class Regle: # premise : predicat , conclusion : liste de predicat
-    def __init__(self, premise, conclusion=[]):
-        self.premise, self.conclusion = premise, conclusion
+	def __init__(self, premise, conclusion=[]):
+		self.premise, self.conclusion = premise, conclusion
 
 
 class BaseDeConnaissance:
-    def __init__(self, regles=[], faits=[]):
-        self.regles , self.faits = regles, faits
+	def __init__(self, regles=[], faits=[]):
+		self.regles , self.faits = regles, faits
 
 
 class Moteur:
 	def __init__(self, base_de_connaissance):
 		self.base_de_connaissance = base_de_connaissance
 
-    def chainage_avant(self, but=None):
+	def chainage_avant(self, but=None):
 	return
 
-    def chainage_arriere(self, but=None):
+	def chainage_arriere(self, but=None):
 		if (but == None):
 			print("tu as besoin d'un but dans ta vie")
 			return
