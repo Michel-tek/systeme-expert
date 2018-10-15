@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE fait SYSTEM "Fait.dtd">
+<faits>
+	<predicat nom="=">T 17</predicat>
+	<predicat nom="=">K 0/8</predicat>
+</faits>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE regle SYSTEM "Regle.dtd">
+<regles>
+	<regle>
+		<conditions>
+			<predicat nom="=">S 10</predicat>
+			<predicat nom="<">K 1/8</predicat>
+			<predicat nom=">">T 15</predicat>
+		</conditions>
+		<conclusion>
+			<predicat nom="beau_temps" />
+		</conclusion>
+	</regle>
+</regles>
