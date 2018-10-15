@@ -24,14 +24,18 @@ class BaseDeConnaissance:
 
 
 class Moteur:
-    def __init__(self, base_de_connaissance):
-        self.base_de_connaissance = base_de_connaissance
+	def __init__(self, base_de_connaissance):
+		self.base_de_connaissance = base_de_connaissance
 
-    def chainage_avant(self):
+    def chainage_avant(self, but=None):
 	return
 
-    def chainage_arriere(self):
-        return
+    def chainage_arriere(self, but=None):
+		if (but == None):
+			print("tu as besoin d'un but dans ta vie")
+			return
+		
+		
 '''
 chainage arriere (but)
 
