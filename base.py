@@ -7,8 +7,9 @@ from sys import argv, exit, stderr
 msg = stderr.write
 
 ## Usage
+usage = "Usage: {0} (avant|arriere) ${{base}}.xml [ < ${{fait}}.xml ] [ > ${{conclusions}}.xml ]\n".format(argv[0])
 if len(argv) <= 3:
-	msg("Usage: {0} (avant|arriere) ${{base}}.xml [ < ${{fait}}.xml ] [ > ${{conclusions}}.xml ]\n".format(argv[0]))
+	msg(usage)
 	exit(0)
 
 
@@ -27,6 +28,10 @@ moteur = Moteur(parse(argv[2]))
 
 
 ## Le traitement en soi-même
-#conclusion.write(XML(to( Moteur.avant(from(parse(faits.read()))) if argv[1] == "arriere" else
+if argv[1] not in {"arriere", "avant"}:
+	msg(usage)
+	exit(1)
+
+#conclusion.write(XML(to( Moteur.avant(from(parse(faits.read())))   if argv[1] == "arriere" else
 #                         Moteur.arriere(from(parse(faits.read())))
 #                       )))
