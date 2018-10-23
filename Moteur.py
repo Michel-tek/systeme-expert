@@ -10,7 +10,7 @@ class Predicat:
 
 class Condition:
 	def __int__(self, predicat):
-	self.predicat = predicat
+		self.predicat = predicat
 
 
 class Regle: # premise : predicat , conclusion : liste de predicat
@@ -28,19 +28,19 @@ class Moteur:
 		self.base_de_connaissance = base_de_connaissance
 
 	def chainage_avant(self, but=None):
-	return
+		return
 
 	def chainage_arriere(self, but=None):
 		if (but == None):
 			print("tu as besoin d'un but dans ta vie")
 			return
-		
+
 		
 '''
 chainage arriere (but)
 
 	sur une base de connaissance
-	
+
 
 '''
 
