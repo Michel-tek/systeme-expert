@@ -7,31 +7,24 @@ from sys import argv, exit, stderr
 msg = stderr.write
 
 ## Usage
-usage = "Usage: {0} (avant|arriere) ${{base}}.xml [ < ${{fait}}.xml ] [ > ${{conclusions}}.xml ]\n".format(argv[0])
-if len(argv) <= 3:
+usage = ( "Usage: {0} interactive\n"
+        + "     | {0} avant        <base> [ < <faits> ] [ > <conclusions> ])\n"
+        + "     | {0} arriere      <base> [ < <faits> ] [ > <conclusions> ])\n").format(argv[0])
+
+if len(argv) == 1:
 	msg(usage)
 	exit(0)
 
 
 
 ## Règles et moteur
-if ".xml" not in argv[2]:
-	msg("{0} n'est pas un fichier XML".format(argv[2]))
-	exit(1)
-
 from xml.etree.ElementTree import parse, XML
 from Moteur import Moteur
-#from Logique import from, to
-moteur = Moteur(parse(argv[2]))
-#moteur = Moteur(from(parse(argv[2])))
 
 
 
-## Le traitement en soi-même
-if argv[1] not in {"arriere", "avant"}:
-	msg(usage)
-	exit(1)
-
-#conclusion.write(XML(to( Moteur.avant(from(parse(faits.read())))   if argv[1] == "arriere" else
-#                         Moteur.arriere(from(parse(faits.read())))
-#                       )))
+## Triage du mode d'opération
+if argv[1] == "interactive":
+	from Interface import Interface
+	application = Interface()
+	application.mainloop()
