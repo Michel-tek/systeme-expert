@@ -35,39 +35,50 @@ class Moteur:
 			print("tu as besoin d'un but dans ta vie")
 			return
 
+
+'''
+le moteur est une classe abstraite avec une liste de faits et une liste de regles
+	la liste de faits est un ensemble de predicats
+	la liste de regles comprend des conditions (plusieurs predicats) donnant accès à une conclusion (un prédicat)
+	
+ainsi que les fonctions
+	initialisation des bases de faits et regles (fichier.xml)
+	chainage avant (but=None, profondeur=true)
+	chainage arriere (but=None, profondeur=true)
+	verification des conditions(regle)
+	verification de la conclusion(regle)
+	
+	
+Fonctionnement du chainage avant:
+	variables :
+		appliquee[] 	# tableau de la taille de la liste des regles initialisé a faux
+		faits 		# attribut de classe
+		regles		# attribut de classe
+		modification	# booleen informant de modification lors du déroulement de l'algorithme
 		
-'''
-chainage arriere (but)
-
-	sur une base de connaissance
-
-
-'''
-
-
-
-
-
-'''
-chainage avant
-	sur une base de fait
-	tant que ajout_regle ou que toutes les regles n'ont pas ete activées
-		chercher une regle qui peut etre appliquée
-			ajout_regle est vrai
-			ajout de la conclusion de la regle a la base de faits
-			regle.activee = vrai
-
-resultat lister tous les predicats atteints
-
-chainage avant (but)
-	sur une base de fait
-	tant que ajout_regle ou que toutes les regles n'ont pas ete activées ou que le but n'est pas atteint
-		chercher une regle qui peut etre appliquée
-			ajout_regle est vrai
-			ajout de la conclusion de la regle a la base de faits
-			regle.activee = vrai
-			si conclusion == but alors but_atteint = vrai
-
-resultat lister tous les predicats atteints
+	code :
+		modification = vrai
+		Tant que ( 	
+			modification 
+			&& 
+			(filtre sur appliquee pour verifier qu'il reste des regles a appliquer) 
+			&& 
+			(but==None || but n'appartient pas à la base de faits )
+			 )
+			modification = faux
+			Pour i allant de 0 à Regles.size
+				Si !appliquee[i]
+					Si verifications des conditions(Regles[i])
+						modification = vrai
+						appliquee[i] = vrai
+						Si profondeur
+							ajouter Regles[i].conclusion à la fin des faits
+						sinon
+							ajouter Relges[i].conclusion au debut des faits
+		retourne but atteint (vrai ou faux)
+	ensuite traitement par l'interface graphique 
+	(utilisation de yield pour verifier a chaque etape dans la boucle???????? possible?
+	sinon appel a une fonction update de l'interface graphique pour afficher quelle regle est appliquee et l'etat de la base de faits)
 
 '''
+
