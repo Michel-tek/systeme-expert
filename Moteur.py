@@ -68,16 +68,47 @@ Fonctionnement du chainage avant:
 			modification = faux
 			Pour i allant de 0 à Regles.size
 				Si !appliquee[i]
-					Si verifications des conditions(Regles[i])
+					Si verifications des conditions(Regles[i])(toutes les conditions appartiennent aux faits)
 						modification = vrai
 						appliquee[i] = vrai
 						Si profondeur
 							ajouter Regles[i].conclusion à la fin des faits
 						sinon
 							ajouter Relges[i].conclusion au debut des faits
-		retourne but atteint (vrai ou faux)
+		retourne but atteint (vrai ou faux(ou None est ce que c'est possible?? sinon 1 2 ou 3))
 	ensuite traitement par l'interface graphique 
-	(utilisation de yield pour verifier a chaque etape dans la boucle???????? possible?
+	(utilisation de yield pour verifier a chaquavecavece etape dans la boucle???????? possible?
+	sinon appel a une fonction update de l'interface graphique pour afficher quelle regle est appliquee et l'etat de la base de faits)
+
+fonctionnement chainage arrière:
+	variables :
+		appliquee[] 	# tableau de la taille de la liste des regles initialisé a faux
+		faits 		# attribut de classe
+		regles		# attribut de classe
+		modification	# booleen informant de modification lors du déroulement de l'algorithme
+		
+	code :
+		modification = vrai
+		Tant que ( 	
+			modification 
+			&& 
+			(filtre sur appliquee pour verifier qu'il reste des regles a appliquer) 
+			&& 
+			(but==None || but n'appartient pas à la base de faits )
+			 )
+			modification = faux
+			Pour i allant de 0 à Regles.size
+				Si !appliquee[i]
+					Si verifications de la conclusion(Regles[i]) (la conclusion appartient à la base de faits)
+						modification = vrai
+						appliquee[i] = vrai
+						Si profondeur
+							ajouter Regles[i].conditions à la fin des faits
+						sinon
+							ajouter Relges[i].conditions au debut des faits
+		retourne but atteint (vrai ou faux (ou None est ce que c'est possible?? sinon 1 2 ou 3))
+	ensuite traitement par l'interface graphique 
+	(utilisation de yield pour verifier a chaquavecavece etape dans la boucle???????? possible?
 	sinon appel a une fonction update de l'interface graphique pour afficher quelle regle est appliquee et l'etat de la base de faits)
 
 '''
