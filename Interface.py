@@ -7,20 +7,18 @@ class Interface(Frame):
 		Frame.__init__(self, master)
 		self.grid()
 		self.master.title("Moteur 0+")
-		self.grid_configure(sticky=(N, S, E, W))
 
 		## Grandes divisions
-		self.divisions = Notebook(self)
-		self.divisions.grid(sticky=(N, S, E, W))
-		self.divisions.grid_anchor(anchor="center")
+		self.divisions = Notebook(self, padding=(0, 30, 0, 0))
+		self.divisions.grid()
 
 		self.base = Frame(self.divisions)
 		self.divisions.add(self.base, text="Base")
+		self.base.grid()
 
 		self.cas  = Frame(self.divisions)
 		self.divisions.add(self.cas, text="Cas")
-		self.cas.columnconfigure(0, weight=1)
-		self.cas.rowconfigure(0, weight=1)
+		self.cas.grid()
 
 		self.cadre_faits    = Labelframe(self.cas, text="Faits")
 		self.cadre_faits.grid(column=0, sticky=(N, S, E, W))
@@ -36,8 +34,9 @@ class Interface(Frame):
 		self.chainage_arriere.grid(sticky=W)
 
 		##    Lancer
-		self.lance  = BooleanVar
-		self.lancer = Button(self.cadre_controle, text="Lancer").grid(sticky=W)
+		self.lance  = BooleanVar()
+		self.lancer = Button(self.cadre_controle, text="Lancer")
+		self.lancer.grid(sticky=W)
 
 
 
