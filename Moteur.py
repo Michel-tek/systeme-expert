@@ -75,6 +75,10 @@ Fonctionnement du chainage avant:
 							ajouter Regles[i].conclusion à la fin des faits
 						sinon
 							ajouter Relges[i].conclusion au debut des faits
+						break de la boucle pour i (est ce que c'est vraiment utile?)
+			fin boucle pour i
+			update de l'interface
+		fin boucle tant que
 		retourne but atteint (vrai ou faux(ou None est ce que c'est possible?? sinon 1 2 ou 3))
 	ensuite traitement par l'interface graphique 
 	(utilisation de yield pour verifier a chaquavecavece etape dans la boucle???????? possible?
@@ -106,10 +110,12 @@ fonctionnement chainage arrière:
 							ajouter Regles[i].conditions à la fin des faits
 						sinon
 							ajouter Relges[i].conditions au debut des faits
+						break de la boucle pour i (est ce que c'est vraiment utile?)
+			fin boucle pour i
+			update de l'interface
+		fin boucle tant que
 		retourne but atteint (vrai ou faux (ou None est ce que c'est possible?? sinon 1 2 ou 3))
 	ensuite traitement par l'interface graphique 
-	(utilisation de yield pour verifier a chaquavecavece etape dans la boucle???????? possible?
-	sinon appel a une fonction update de l'interface graphique pour afficher quelle regle est appliquee et l'etat de la base de faits)
 
 '''
 
