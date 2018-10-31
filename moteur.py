@@ -49,16 +49,12 @@ class Moteur:
 			print("tu as besoin d un but dans ta vie")
 		return
 
-	def verification_condition(self, regle):
-		return
-
 	def chainage_avant(self, but=None, profondeur = True):
 		appliquee=[]
 		for i in range(len(self.regles)):
 			appliquee.append(False)
 		modification = True
-
-		while modification and ( list(filter(lambda x: x==False, appliquee)) != [] and (but == None  or (list(filter(lambda x: x==but, self.faits))) ) ):
+		while modification and ( list(filter(lambda x: x==False, appliquee)) != [] and (but == None  or (list(filter(lambda x: x==but, self.faits))) == [] ) ):
 			#print("modification " + str(modification) + " appliquee = " +str(( list(filter(lambda x: x==True, appliquee)))))
 			modification = False
 			for i in range(len(self.regles)):
@@ -76,10 +72,6 @@ class Moteur:
 						break
 					else:
 						print("\tNon!")
-		#print("modification " + str(modification) + " appliquee = " +str(( list(filter(lambda x: x==True, appliquee)))))
-		#print("liste des faits finaux :")
-		#for f in self.faits:
-		#	print("\t- " + str(f))
 		print("fin du chainage_avant")
 		return
 

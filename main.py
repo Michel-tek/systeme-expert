@@ -8,7 +8,7 @@ moteur = creation_moteur("faits_chien.xml", "regles_chien.xml")
 
 print(moteur)
 
-moteur.chainage_avant()
+moteur.chainage_avant(Predicat("le chien est heureux"))
 
 print("Résultat :")
 
