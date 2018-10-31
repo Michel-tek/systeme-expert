@@ -44,10 +44,37 @@ class Moteur:
 			string += "\n\t\t- " + str(f)
 		return string
 
-	def chainage_arriere(self, but=None):
+	def chainage_arriere(self, but=None, profondeur = True):
 		if (but == None):
 			print("tu as besoin d un but dans ta vie")
-		return
+			return
+		
+		appliquee=[]
+		for i in range(len(self.regles)):
+			appliquee.append(False)
+		modification = True
+		while modification and ( list(filter(lambda x: x==False, appliquee)) != [] and (but == None  or (list(filter(lambda x: x==but, self.faits))) == [] ) ):
+			modification = False
+			for i in range(len(self.regles)):
+				if not(appliquee[i]):
+					print("Avons nous appliquee la regle " + str(i) + " : \n\t" + str(self.regles[i]) + " ?")
+					if self.regles[i].conclusion in self.faits:
+						print("\tOui!")
+						modification = True
+						appliquee[i] = True
+						for c in self.regles[i].conditions:
+							print("\tAjout de " + str(c)+ " à la liste de faits")
+							if profondeur:
+								self.faits.append(c)
+							else:
+								self.faits.insert(0,c)
+					else:
+						print("\tNon!")
+				if modification:
+					break
+		print("fin du chainage arriere")
+
+
 
 	def chainage_avant(self, but=None, profondeur = True):
 		appliquee=[]
@@ -55,7 +82,6 @@ class Moteur:
 			appliquee.append(False)
 		modification = True
 		while modification and ( list(filter(lambda x: x==False, appliquee)) != [] and (but == None  or (list(filter(lambda x: x==but, self.faits))) == [] ) ):
-			#print("modification " + str(modification) + " appliquee = " +str(( list(filter(lambda x: x==True, appliquee)))))
 			modification = False
 			for i in range(len(self.regles)):
 				if not(appliquee[i]):
@@ -64,48 +90,16 @@ class Moteur:
 						print("\tOui!")
 						modification = True
 						appliquee[i] = True
-						print("ajout de " + str(self.regles[i].conclusion)+ " à la liste de faits")
+						print("\tAjout de " + str(self.regles[i].conclusion)+ " à la liste de faits")
 						if profondeur:
 							self.faits.append(self.regles[i].conclusion)
 						else:
 							self.faits.insert(0,self.regles[i].conclusion)
-						break
 					else:
 						print("\tNon!")
-		print("fin du chainage_avant")
-		return
-
-'''
-	code :
-		modification = vrai
-		Tant que ( 	
-			modification 
-			&& 
-			(filtre sur appliquee pour verifier qu'il reste des regles a appliquer) 
-			&& 
-			(but==None || but n'appartient pas à la base de faits )
-			 )
-			modification = faux
-			Pour i allant de 0 à Regles.size
-				Si !appliquee[i]
-					Si verifications des conditions(Regles[i])(toutes les conditions appartiennent aux faits)
-						modification = vrai
-						appliquee[i] = vrai
-						Si profondeur
-							ajouter Regles[i].conclusion à la fin des faits
-						sinon
-							ajouter Relges[i].conclusion au debut des faits
-						break de la boucle pour i (est ce que c'est vraiment utile?)
-			fin boucle pour i
-			update de l'interface
-		fin boucle tant que
-		retourne but atteint (vrai ou faux(ou None est ce que c'est possible?? sinon 1 2 ou 3))
-	ensuite traitement par l'interface graphique 
-	(utilisation de yield pour verifier a chaquavecavece etape dans la boucle???????? possible?
-	sinon appel a une fonction update de l'interface graphique pour afficher quelle regle est appliquee et l'etat de la base de faits)
-
-'''
-
+				if modification:
+					break
+		print("fin du chainage avant")
 
 '''
 le moteur est une classe abstraite avec une liste de faits et une liste de regles

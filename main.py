@@ -4,12 +4,29 @@
 from xml_reader import *
 
 
-moteur = creation_moteur("faits_chien.xml", "regles_chien.xml")
+print("\n\nTEST CHAINAGE AVANT\n\n")
 
-print(moteur)
+moteurAV = creation_moteur("faits_chien_avant.xml", "regles_chien.xml")
 
-moteur.chainage_avant(Predicat("le chien est heureux"))
+print(moteurAV)
 
-print("Résultat :")
+moteurAV.chainage_avant(Predicat("le chien joue avec le facteur"))
 
-print(moteur)
+
+print("\n\nRESULTAT CHAINAGE AVANT\n\n")
+
+print(moteurAV)
+
+
+
+print("\n\nTEST CHAINAGE ARRIERE\n\n")
+
+
+moteurAR = creation_moteur("faits_chien_arriere.xml", "regles_chien.xml")
+
+moteurAR.chainage_arriere(Predicat("il fait beau"))
+
+
+print("\n\nRESULTAT CHAINAGE ARRIERE\n\n")
+
+print(moteurAR)
