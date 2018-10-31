@@ -1,4 +1,3 @@
-﻿
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
@@ -11,32 +10,25 @@ class Predicat:
 	def __str__(self):
 		return self.nom
 
+	def __eq__(self, other):
+		if isinstance(other, Predicat):
+			return self.nom == other.nom
+		return False
+
 	def arite(self):
 		return len(self.variable)
 
-
-class Condition:
-	def __int__(self, predicat):
-		self.predicat = predicat
-
-	def __str__(self):
-		return str(self.predicat)
-
-class Regle: # premise : predicat , conclusion : liste de predicat
+class Regle:
 	def __init__(self, conditions, conclusion):
 		self.conditions, self.conclusion = conditions, conclusion
 
 	def __str__(self):
 		string = "Si "
 		for i in range(len(self.conditions)):
-			string += ( "et " if i >=1 else "")+  str(self.conditions[i]) + " "
+			string += ( "et " if i >=1 else "") +  str(self.conditions[i]) + " "
 		string += "Alors " + str(self.conclusion)
 		return string
-''' useless
-class BaseDeConnaissance:
-	def __init__(self, regles=[], faits=[]):
-		self.regles , self.faits = regles, faits
-'''
+
 
 class Moteur:
 	def __init__(self, regles=[], faits=[]):
@@ -51,7 +43,6 @@ class Moteur:
 		for f in self.faits:
 			string += "\n\t\t- " + str(f)
 		return string
-
 
 	def chainage_arriere(self, but=None):
 		if (but == None):
@@ -77,7 +68,7 @@ class Moteur:
 						print("\tOui!")
 						modification = True
 						appliquee[i] = True
-						print("ajout de " + str(self.regles[i].conclusion))
+						print("ajout de " + str(self.regles[i].conclusion)+ " à la liste de faits")
 						if profondeur:
 							self.faits.append(self.regles[i].conclusion)
 						else:
@@ -91,42 +82,6 @@ class Moteur:
 		#	print("\t- " + str(f))
 		print("fin du chainage_avant")
 		return
-
-
-print("Let's begin")
-
-beau = Predicat("il fait beau")
-pluie = Predicat("il pleut")
-
-chien_dehors = Predicat("le chien peut aller dehors")
-chien_interieur = Predicat("le chien ne peut pas sortir")
-
-chien_heureux = Predicat("le chien est heureux")
-chien_triste = Predicat("le chien est triste")
-
-facteur_arrive = Predicat("le facteur arrive")
-
-facteur_heureux = Predicat("le chien joue avec le facteur")
-facteur_triste = Predicat("le chien aboie sur le facteur")
-
-balle = Predicat("le facteur lance la baballe")
-
-balle_le_retour = Predicat("le chien rapporte la baballe")
-
-regle_beau_dehors = Regle([beau],chien_dehors)
-regl_pluie_interieur = Regle([pluie],chien_interieur)
-regle_dehors_heureux = Regle([chien_dehors], chien_heureux)
-regle_dehors_facteur_balle = Regle([chien_dehors, facteur_arrive],balle)
-regle_balle_rapporte = Regle([balle],balle_le_retour)
-
-moteur = Moteur([regle_beau_dehors, regl_pluie_interieur, regle_dehors_heureux,regle_dehors_facteur_balle, regle_balle_rapporte],[beau,facteur_arrive])
-
-print(str(moteur))
-
-
-moteur.chainage_avant()
-
-print(str(moteur))
 
 '''
 	code :
