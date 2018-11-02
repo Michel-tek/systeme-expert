@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE fait SYSTEM "Fait.dtd">
+<faits>
+	<predicat nom="heure" operateur="=" valeur="10"/>
+	<predicat nom="temps" operateur="=" valeur="soleil"/>
+	<predicat nom="chien" operateur="=" valeur="heureux"/>
+	<predicat nom="facteur" operateur="" valeur=""/>
+	<predicat nom="" operateur="" valeur=""/>
+	<predicat nom="" operateur="" valeur=""/>
+</faits>
+<!--
+	<predicat nom="" operateur="" valeur=""/>
+<predicat nom="il fait beau"></predicat>
+<predicat nom="il pleut"></predicat>
+<predicat nom="le chien peut aller dehors"></predicat>
+<predicat nom="le chien ne peut pas sortir"></predicat>
+<predicat nom="le chien est heureux"></predicat>
+<predicat nom="le chien est triste"></predicat>
+<predicat nom="le facteur arrive"></predicat>
+<predicat nom="le chien joue avec le facteur"></predicat>
+<predicat nom="le chien aboie sur le facteur"></predicat>
+<predicat nom="le facteur lance la baballe"></predicat>
+<predicat nom="le chien rapporte la baballe"></predicat>
+-->

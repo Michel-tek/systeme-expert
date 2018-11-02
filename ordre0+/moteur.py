@@ -49,6 +49,14 @@ class Moteur:
 			print("tu as besoin d un but dans ta vie")
 			return
 		
+		print("\nVoici notre but : \n\t" + str(but) + "\n")
+
+		print("En partant des faits de base suivant :")
+		for i, fait in enumerate(self.faits):
+			print("\t" + str(i) + " " + str(fait))
+
+		print()
+
 		appliquee=[]
 		for i in range(len(self.regles)):
 			appliquee.append(False)
