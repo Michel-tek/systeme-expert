@@ -12,11 +12,9 @@ print(moteurAV)
 
 moteurAV.chainage_avant(Predicat("le chien joue avec le facteur"))
 
-
 print("\n\nRESULTAT CHAINAGE AVANT\n\n")
 
 print(moteurAV)
-
 
 
 print("\n\nTEST CHAINAGE ARRIERE\n\n")

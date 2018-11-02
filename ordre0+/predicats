@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE fait SYSTEM "Fait.dtd">
-<faits>
-	<predicat nom="le chien rapporte la balle de couleur" operateur="=" valeur="bleue"/>
-</faits>
+
+
 <!--
 	<predicat nom="l'heure" operateur="=" valeur="10"/>
 	<predicat nom="le temps" operateur="=" valeur="soleil"/>
