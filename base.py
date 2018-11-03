@@ -19,13 +19,13 @@ if len(argv) == 1:
 
 ## Règles et moteur
 from xml.etree.ElementTree import parse, XML
-from Moteur import Moteur
+from ordre0.moteur import Moteur
 
 
 
 ## Triage du mode d'opération
 if argv[1] == "interactive":
-	from Interface import Interface
+	from interface import Interface
 
 	try:
 		## Analyser la base de connaissances en entrée et
