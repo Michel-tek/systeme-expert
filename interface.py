@@ -9,16 +9,16 @@ class Interface(Frame):
 		self.master.title("Moteur 0+")
 
 		## Grandes divisions
-		self.divisions = Notebook(self, padding=(0, 30, 0, 0))
+		self.divisions = Notebook(self)
 		self.divisions.grid()
 
 		self.base = Frame(self.divisions)
-		self.divisions.add(self.base, text="Base")
 		self.base.grid()
+		self.divisions.add(self.base, text="Base")
 
 		self.cas  = Frame(self.divisions)
-		self.divisions.add(self.cas, text="Cas")
 		self.cas.grid()
+		self.divisions.add(self.cas, text="Cas")
 
 		self.cadre_faits    = Labelframe(self.cas, text="Faits")
 		self.cadre_faits.grid(column=0, sticky=(N, S, E, W))
