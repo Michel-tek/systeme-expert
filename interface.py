@@ -1,29 +1,29 @@
+from tkinter import *
 from tkinter.ttk import *
-from tkinter import IntVar, BooleanVar, N, S, W, E
 
 class Interface(Frame):
 	def __init__(self, master=None):
 		## Initialisation de la fenêtre
 		Frame.__init__(self, master)
-		self.grid()
+		self.pack(fill=BOTH)
 		self.master.title("Moteur 0+")
 
 		## Grandes divisions
 		self.divisions = Notebook(self)
-		self.divisions.grid()
+		self.divisions.pack(fill=BOTH)
 
 		self.base = Frame(self.divisions)
-		self.base.grid()
+		self.base.pack(fill=BOTH)
 		self.divisions.add(self.base, text="Base")
 
 		self.cas  = Frame(self.divisions)
-		self.cas.grid()
+		self.cas.pack(fill=BOTH)
 		self.divisions.add(self.cas, text="Cas")
 
 		self.cadre_faits    = Labelframe(self.cas, text="Faits")
-		self.cadre_faits.grid(column=0, sticky=(N, S, E, W))
+		self.cadre_faits.pack(side=RIGHT, fill=BOTH)
 		self.cadre_controle = Labelframe(self.cas, text="Controle")
-		self.cadre_controle.grid(column=1, sticky=(N, S))
+		self.cadre_controle.pack(side=LEFT)
 
 		## Controle:
 		##    Option de chaînage avant ou arrière
