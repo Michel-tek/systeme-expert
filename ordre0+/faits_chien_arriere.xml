@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE fait SYSTEM "Fait.dtd">
 <faits>
-	<predicat nom="le chien rapporte la balle de couleur" operateur="=" valeur="bleue"/>
+	<predicat nom="le chien va chercher la balle et la rapporte dans la main" operateur="=" valeur="gauche"/>
 </faits>
 <!--
 	<predicat nom="l'heure" operateur="=" valeur="10"/>

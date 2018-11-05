@@ -11,7 +11,7 @@
 	</regle>
 	<regle>
 		<conditions>
-			<predicat nom="le temps" operateur="==" valeur="soleil"/>
+			<predicat nom="le temps" operateur="=" valeur="soleil"/>
 		</conditions>
 		<conclusion>
 			<predicat nom="le chien peut sortir de la maison"/>
@@ -19,7 +19,7 @@
 	</regle>
 	<regle>
 		<conditions>
-			<predicat nom="le temps" operateur="==" valeur="pluie"/>
+			<predicat nom="le temps" operateur="=" valeur="pluie"/>
 		</conditions>
 		<conclusion>
 			<predicat nom="le chien reste a la maison"/>
@@ -53,7 +53,7 @@
 	<regle>
 		<conditions>
 			<predicat nom="le facteur prend une balle"/>
-			<predicat nom="la couleur de la balle" operateur="==" valeur="bleue"/>
+			<predicat nom="la couleur de la balle" operateur="=" valeur="bleue"/>
 		</conditions>
 		<conclusion>
 			<predicat nom="le facteur lance la balle" operateur="=" valeur="bleue"/>
@@ -61,15 +61,8 @@
 	</regle>
 	<regle>
 		<conditions>
-			<predicat nom="le facteur lance la balle" operateur="==" valeur="bleue"/>
-		</conditions>
-		<conclusion>
-			<predicat nom="le chien va chercher la balle et la rapporte dans la main" operateur="=" valeur="droite"/>
-		</conclusion>
-	</regle>
-	<regle>
-		<conditions>
-			<predicat nom="le facteur prend une balle" operateur="==" valeur="rouge"/>
+			<predicat nom="le facteur prend une balle"/>
+			<predicat nom="la couleur de la balle" operateur="=" valeur="rouge"/>
 		</conditions>
 		<conclusion>
 			<predicat nom="le facteur lance la balle" operateur="=" valeur="rouge"/>
@@ -77,8 +70,15 @@
 	</regle>
 	<regle>
 		<conditions>
-			<predicat nom="le facteur lance la balle"/>
-			<predicat nom="la couleur de la balle" operateur="==" valeur="rouge"/>
+			<predicat nom="le facteur lance la balle" operateur="=" valeur="bleue"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien va chercher la balle et la rapporte dans la main" operateur="=" valeur="droite"/>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le facteur lance la balle" operateur="=" valeur="rouge"/>
 		</conditions>
 		<conclusion>
 			<predicat nom="le chien va chercher la balle et la rapporte dans la main" operateur="=" valeur="gauche"/>
