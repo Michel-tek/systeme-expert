@@ -2,29 +2,38 @@
 # -*- coding: utf-8 -*-
 
 from xml_reader import *
-
+from moteur import *
 
 print("\n\nTEST CHAINAGE AVANT\n\n")
 
-moteurAV = creation_moteur("faits_chien_avant.xml", "regles_chien.xml")
+moteur = creation_moteur("regles_chien.xml")
 
-print(moteurAV)
+liste_des_faits = recuperation_des_faits("faits_chien_avant.xml")
 
-moteurAV.chainage_avant(Predicat("le chien joue avec le facteur"))
+print(moteur)
+
+moteur.chainage_avant(liste_des_faits, Predicat("le chien joue avec le facteur"))
 
 print("\n\nRESULTAT CHAINAGE AVANT\n\n")
 
-print(moteurAV)
+print(moteur)
 
+string = "\n\t*Liste des faits"
+for i, f in enumerate(liste_des_faits):
+    string += "\n\t\t" + str(i) + " - " + str(f)
+print(string)
 
 print("\n\nTEST CHAINAGE ARRIERE\n\n")
 
+liste_des_faits = recuperation_des_faits("faits_chien_arriere.xml")
 
-moteurAR = creation_moteur("faits_chien_arriere.xml", "regles_chien.xml")
-
-moteurAR.chainage_arriere(Predicat("il fait beau"))
-
+moteur.chainage_arriere(liste_des_faits, Predicat("il fait beau"))
 
 print("\n\nRESULTAT CHAINAGE ARRIERE\n\n")
 
-print(moteurAR)
+print(moteur)
+
+string = "\n\t*Liste des faits"
+for i, f in enumerate(liste_des_faits):
+    string += "\n\t\t" + str(i) + " - " + str(f)
+print(string)
