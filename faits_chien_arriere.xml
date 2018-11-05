@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE fait>
+<faits>
+	<predicat nom="le chien va chercher la balle et la rapporte dans la main" operateur="=" valeur="gauche"/>
+</faits>

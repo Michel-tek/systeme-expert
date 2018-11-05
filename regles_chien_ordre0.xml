@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE regle>
+<regles>
+	<regle>
+		<conditions>
+			<predicat nom="il fait beau"></predicat>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien peut aller dehors"></predicat>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="il pleut"></predicat>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien ne peut pas sortir"></predicat>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le chien ne peut pas sortir"></predicat>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien est triste"></predicat>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le chien peut aller dehors"></predicat>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien est heureux"></predicat>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le facteur arrive"></predicat>
+			<predicat nom="le chien peut aller dehors"></predicat>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien joue avec le facteur"></predicat>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le chien joue avec le facteur"></predicat>
+		</conditions>
+		<conclusion>
+			<predicat nom="le facteur lance la baballe"></predicat>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le facteur lance la baballe"></predicat>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien rapporte la baballe"></predicat>
+		</conclusion>
+	</regle>
+</regles>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE fait>
+<faits>
+	<predicat nom="l'heure" operateur="=" valeur="10"/>
+	<predicat nom="le temps" operateur="=" valeur="soleil"/>
+	<predicat nom="la couleur de la balle" operateur="=" valeur="bleue"/>
+	<predicat nom="la couleur de la balle" operateur="=" valeur="rouge"/>
+</faits>

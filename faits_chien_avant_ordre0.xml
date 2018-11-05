@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE fait>
+<faits>
+	<predicat nom="il fait beau"></predicat>
+	<predicat nom="le facteur arrive"></predicat>
+</faits>

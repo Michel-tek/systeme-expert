@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE regle>
+<regles>
+	<regle>
+		<conditions>
+			<predicat nom="l'heure" operateur=">=" valeur="10"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="le facteur arrive"/>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le temps" operateur="=" valeur="soleil"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien peut sortir de la maison"/>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le temps" operateur="=" valeur="pluie"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien reste a la maison"/>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le chien peut sortir de la maison"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="l'humeur du chien" operateur="=" valeur="heureux"/>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le chien reste a la maison"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="l'humeur du chien" operateur="=" valeur="triste"/>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le facteur arrive"/>
+			<predicat nom="le chien peut sortir de la maison"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="le facteur prend une balle"/>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le facteur prend une balle"/>
+			<predicat nom="la couleur de la balle" operateur="=" valeur="bleue"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="le facteur lance la balle" operateur="=" valeur="bleue"/>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le facteur prend une balle"/>
+			<predicat nom="la couleur de la balle" operateur="=" valeur="rouge"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="le facteur lance la balle" operateur="=" valeur="rouge"/>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le facteur lance la balle" operateur="=" valeur="bleue"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien va chercher la balle et la rapporte dans la main" operateur="=" valeur="droite"/>
+		</conclusion>
+	</regle>
+	<regle>
+		<conditions>
+			<predicat nom="le facteur lance la balle" operateur="=" valeur="rouge"/>
+		</conditions>
+		<conclusion>
+			<predicat nom="le chien va chercher la balle et la rapporte dans la main" operateur="=" valeur="gauche"/>
+		</conclusion>
+	</regle>
+</regles>
