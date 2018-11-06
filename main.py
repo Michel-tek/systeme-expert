@@ -3,6 +3,16 @@
 
 from xml_reader import *
 from moteur import *
+from interface import *
+
+vp_start_gui()
+
+"""
+fenetre = Tk()
+interface = Interface(fenetre)
+
+interface.mainloop()
+interface.destroy()
 
 print("\n\nTEST CHAINAGE AVANT\n\n")
 
@@ -38,3 +48,4 @@ string = "\n*Liste des faits"
 for i, f in enumerate(liste_des_faits):
     string += "\n\t" + str(i) + " - " + str(f)
 print(string)
+"""
