@@ -8,12 +8,6 @@ from interface import *
 vp_start_gui()
 
 """
-fenetre = Tk()
-interface = Interface(fenetre)
-
-interface.mainloop()
-interface.destroy()
-
 print("\n\nTEST CHAINAGE AVANT\n\n")
 
 moteur = creation_moteur("regles_chien.xml")
@@ -22,11 +16,10 @@ liste_des_faits = recuperation_des_faits("faits_chien_avant.xml")
 
 print(moteur)
 
-moteur.chainage_avant(liste_des_faits, Predicat("le chien joue avec le facteur"))
-
 print("\n\nRESULTAT CHAINAGE AVANT\n\n")
 
-print(moteur)
+print(moteur.chainage_avant(liste_des_faits, Predicat("le chien joue avec le facteur")))
+
 
 string = "\n\t*Liste des faits"
 for i, f in enumerate(liste_des_faits):

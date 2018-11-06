@@ -14,7 +14,7 @@
 			<predicat nom="le temps" operateur="=" valeur="soleil"/>
 		</conditions>
 		<conclusion>
-			<predicat nom="le chien peut sortir de la maison"/>
+			<predicat nom="le chien sort de la maison"/>
 		</conclusion>
 	</regle>
 	<regle>
@@ -84,4 +84,18 @@
 			<predicat nom="le chien va chercher la balle et la rapporte dans la main" operateur="=" valeur="gauche"/>
 		</conclusion>
 	</regle>
+	<coherences>
+		<coherence>
+				<predicat nom="le temps" operateur="=" valeur="soleil"/>
+				<predicat nom="le temps" operateur="=" valeur="pluie"/>
+		</coherence>
+		<coherence>
+				<predicat nom="le chien sort de la maison"/>
+				<predicat nom="le chien reste a la maison"/>
+		</coherence>
+		<coherence>
+				<predicat nom="l'humeur du chien" operateur="=" valeur="heureux"/>
+				<predicat nom="l'humeur du chien" operateur="=" valeur="triste"/>
+		</coherence>
+	</coherences>
 </regles>

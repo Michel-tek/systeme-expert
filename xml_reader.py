@@ -20,7 +20,14 @@ def creation_moteur(fichier_regles):
 
         liste_des_regles.append(Regle(liste_des_conditions,conclusion))
 
-    return Moteur(liste_des_regles)
+    liste_incoherence=[]
+    for i, coherence in enumerate(regles.xpath("/regles/coherences/coherence")):
+        liste_des_predicats=[]
+        for p in coherence.xpath("predicat"):
+            liste_des_predicats.append(Predicat(p.get("nom"), p.get("operateur"),p.get("valeur")))
+        liste_incoherence.append(Coherence(liste_des_predicats))
+
+    return Moteur(liste_des_regles, liste_incoherence)
 
 
 def recuperation_des_faits(fichier_faits):

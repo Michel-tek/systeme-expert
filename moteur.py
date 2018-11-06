@@ -1,29 +1,16 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-
-# class Colors:
-#     HEADER = '\033[95m'
-#     OKBLUE = '\033[94m'
-#     RED = '\033[91m'
-#     OKGREEN = '\033[92m'
-#     WARNING = '\033[93m'
-#     FAIL = '\033[91m'
-#     ENDC = '\033[0m'
-#     BOLD = '\033[1m'
-#     UNDERLINE = '\033[4m'
-
-
 class Predicat:
+    """
+    un predicat est composé d'un nom et éventuellement d'un opérateur et d'une valeur
+    la surcharge de __eq__ permet de gérer l'égalité 
+    ou la vérité de la comparaison si l'opérateur est différent de l'égalité
+    """
     def __init__(self, nom="", operateur="", valeur=""):
         self.nom = nom
         self.operateur = operateur
         self.valeur = valeur
-
-    # def __str__(self):
-    #     return Colors.OKBLUE + str(self.nom) + Colors.ENDC +\
-    #            (" " + Colors.RED + str(self.operateur) + Colors.ENDC +
-    #             " " + Colors.RED + (str(self.valeur) + Colors.ENDC )if self.operateur is not None else "")
 
     def __str__(self):
         return str(self.nom) + (" " + str(self.operateur) + " " + (str(self.valeur) )if self.operateur is not None else "")
@@ -64,6 +51,18 @@ class Predicat:
             return False
 
 
+class Coherence:
+
+    def __init__(self, liste_predicat):
+        self.coherence = tuple(liste_predicat)
+
+    def __str__(self):
+        string = "\nIl existe une incohérence entre les faits suivants : "
+        for c in self.coherence:
+            string += "\n\t" + str(c)
+        return string
+
+
 class Regle:
 
     def __init__(self, conditions, conclusion):
@@ -85,17 +84,24 @@ class Regle:
 
 
 class Moteur:
-    def __init__(self, regles):
+    def __init__(self, regles, coherences):
         self.regles = regles
+        self. coherences = coherences
 
     def __str__(self):
-        string=""
+        string="Règles : \n"
         for i, r in enumerate(self.regles):
             string += "Règle " + str(i) + " \n" + str(r) + "\n"
+        if self.coherences is not []:
+            string += "\nListe des incohérences : "
+            for c in self.coherences:
+                string += str(c)
         return string
 
     def chainage_avant(self, faits, but=None):
         string =""
+        if self.test_coherence(faits):
+            return "Il y a une incohérence dans les faits de base"
         if but:
             # print("\nVoici notre but : \n\t" + str(but) + "\n")
             string += "\nVoici notre but : \n\t" + str(but) + "\n"
@@ -103,7 +109,7 @@ class Moteur:
         string += "Partons des faits de base suivant :\n"
         for i, f in enumerate(faits):
             # print("\t\t" + str(i) + " - " + str(f))
-            string += "\t\t" + str(i) + " - " + str(f)
+            string += "\n\t\t" + str(i) + " - " + str(f)
         # print("")
         string += "\n"
 
@@ -116,7 +122,7 @@ class Moteur:
                 if not (appliquee[i]):
                     # print("Est-il possible d'appliquer la regle " + str(i) + " : \n\t" + str(regle) + " ?")
                     string += "\nEst-il possible d'appliquer la regle " + str(i) + " : \n\t" + str(regle) + " ?"
-                    if (list(filter(lambda condition: condition in faits, regle.conditions))) == regle.conditions:
+                    if (list(filter(lambda fait: fait in regle.conditions, faits))) == regle.conditions:
                         # print(Colors.OKGREEN +"\tOui!" + Colors.ENDC)
                         string += "\n\tOui!"
                         modification = True
@@ -124,6 +130,8 @@ class Moteur:
                         # print("\tAjout de " + str(regle.conclusion) + " à la liste de faits")
                         string += "\n\tAjout de " + str(regle.conclusion) + " à la liste de faits"
                         faits.append(regle.conclusion)
+                        if self.test_coherence(faits):
+                            return string + "\nl'ajout du dernier fait mène à une incohérence"
                     else:
                         # print(Colors.WARNING + "\tNon!" + Colors.ENDC)
                         string += "\n\tNon!"
@@ -172,6 +180,8 @@ class Moteur:
                             # print("\tAjout de " + str(c) + " à la liste de faits")
                             string += "\n\tAjout de " + str(c) + " à la liste de faits"
                             faits.append(c)
+                            if self.test_coherence(faits):
+                                return string + "\nl'ajout du dernier fait mène à une incohérence"
                     else:
                         # print(Colors.WARNING + "\tNon!" + Colors.ENDC)
                         string += "\n\tNon!"
@@ -183,3 +193,14 @@ class Moteur:
             string += "Le but est atteint!"
 
         return string
+
+    def test_coherence(self, faits):
+        for f in faits:
+            for c in self.coherences:
+                if f in c.coherence:
+                    for fait in c.coherence:
+                        if fait != f:
+                            if fait in faits:
+                                return True
+
+        return False
