@@ -1,5 +1,36 @@
 # Système expert
 
+### Info
+
+Vous aurez besoin du package Pmw pour lancer le programme (gestion du comboBox dans l'interface graphique)
+
+	pip install Pmw
+
+## Lancement du programme
+
+	./main.py
+
+Si vous voulez tester avec le chainage avant : 
+
+	- cliquez sur "chargement des fichiers",
+	- puis selectionnez "avant",
+	- vous pouvez éventuellement choisir un but dans la liste,
+	- cliquez sur "lancement du moteur".
+
+Si vous voulez tester avec le chainage arrière : 
+	
+	- changez le texte "faits_chien_avant.xml" par "faits_chien_arriere.xml" (en principe le moteur fonctionne aussi avec le 1er fichier mais vous pourrez faire plus d'itérations avec ce fichier),
+	- cliquez sur "chargement des fichiers",
+	- puis selectionnez "arrière",
+	- vous devez choisir un but dans la liste,
+	- cliquez sur "lancement du moteur".
+
+Pour tester la gestion de la cohérence vous pouvez ajouter le prédicat :
+	
+	<predicat nom="l'humeur du chien" operateur="=" valeur="triste"/>
+
+à la liste des faits de base dans l'un ou l'autre des fichiers "fait_*.xml"
+
 ## Le projet
 
 Ce projet est divisé en 3 parties principales :
@@ -72,6 +103,6 @@ Vous pouvez utiliser le fichier "faits_chien_arriere.xml" pour tester.
 
 ## L'interface graphique
 
-L'interface graphique, généree avec PAGE (http://page.sourceforge.net/), affiche les règles et les faits après les avoir renseigné dans les champs correspondant et avoir cliqué sur "chargement des fichiers".
+L'interface graphique, généree en grande partie avec PAGE (http://page.sourceforge.net/), affiche les règles et les faits après les avoir renseigné dans les champs correspondant et avoir cliqué sur "chargement des fichiers".
 
 Vous devez ensuite choisir entre chainage avant ou arrière et renseigner un but, le clic sur Lancement du moteur gérera l'execution de celui ci et affichera le déroulement de l'algorithme sur la gauche et les faits sur la droite
