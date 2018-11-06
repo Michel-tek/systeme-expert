@@ -38,6 +38,7 @@ Représentation :
 	</regles>
 
 Les règles sont constituées de :
+
 	- une ou plusieurs conditions
 		- la relation entre chaque prédicat dans les conditons est le ET, pour créer un OU il vous faudra créer une seconde règle avec la même conclusion.
 	- une conclusion représentée par un prédicat
