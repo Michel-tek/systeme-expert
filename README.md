@@ -35,12 +35,20 @@ Représentation :
 				<predicat nom="le chien peut sortir de la maison"/>
 			</conclusion>
 		</regle>
+		<coherences>
+			<coherence>
+				<predicat nom="le temps" operateur="=" valeur="soleil"/>
+				<predicat nom="le temps" operateur="=" valeur="pluie"/>
+			</coherence>
+		</coherences>
 	</regles>
 
 Les règles sont constituées de :
 
 	- une ou plusieurs conditions,
 	- une conclusion représentée par un prédicat.
+
+La gestion des incohérences est ajoutée entre les balises "coherences" chaque bloc "coherence" est constitué de prédicats qui ne peuvent pas avoir lieu en même temps.
 
 La relation entre chaque prédicat dans les conditons est le ET, pour créer un OU il vous faudra créer une seconde règle avec la même conclusion.
 
