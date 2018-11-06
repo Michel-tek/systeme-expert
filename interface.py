@@ -5,8 +5,9 @@
 #  in conjunction with Tcl version 8.6
 #    Nov 05, 2018 04:36:21 PM CET  platform: Linux
 
-from tkinter import *
 from xml_reader import *
+from tkinter import tix
+import Pmw
 
 try:
     import Tkinter as tk
@@ -62,7 +63,10 @@ class Toplevel1:
 
         self.moteur = creation_moteur("regles_chien.xml")
         self.liste_des_faits = recuperation_des_faits("faits_chien_avant.xml")
+        self.liste_but = self.generation_but()
 
+        self.faits_list = [" "] + list(map(lambda f : str(f) , self.liste_but))
+        
         self.Labelframe_regles_et_faits = tk.LabelFrame(top)
         self.Labelframe_regles_et_faits.place(relx=0.009, rely=0.006
                 , relheight=0.387, relwidth=0.98)
@@ -116,7 +120,7 @@ class Toplevel1:
                 , bordermode='ignore')
         self.Entry_regles.configure(background="white")
         self.Entry_regles.configure(font="TkFixedFont")
-        self.Entry_regles.insert(INSERT, "regles_chien.xml")
+        self.Entry_regles.insert(tk.INSERT, "regles_chien.xml")
 
         self.Label_regles = tk.Label(self.Labelframe_fichiers)
         self.Label_regles.place(relx=0.02, rely=0.267, height=18, width=43
@@ -128,7 +132,7 @@ class Toplevel1:
                 , bordermode='ignore')
         self.Entry_faits.configure(background="white")
         self.Entry_faits.configure(font="TkFixedFont")
-        self.Entry_faits.insert(INSERT, "faits_chien_avant.xml")
+        self.Entry_faits.insert(tk.INSERT, "faits_chien_avant.xml")
 
         self.Label_faits = tk.Label(self.Labelframe_fichiers)
         self.Label_faits.place(relx=0.367, rely=0.267, height=18, width=32
@@ -158,7 +162,7 @@ class Toplevel1:
         self.Button2.configure(command=self.bouton_lancement_moteur)
         self.Button2.configure(width=237)
 
-        self.var_choix = StringVar()
+        self.var_choix = tk.StringVar()
         self.Radiobutton_avant = tk.Radiobutton(self.Labelframe_moteur)
         self.Radiobutton_avant.place(relx=0.052, rely=0.364, relheight=0.364
                 , relwidth=0.055, bordermode='ignore')
@@ -177,17 +181,20 @@ class Toplevel1:
         self.Radiobutton_arriere.configure(variable=self.var_choix)
         self.Radiobutton_arriere.configure(value="arriere")
 
-        self.Entry3 = tk.Entry(self.Labelframe_moteur)
-        self.Entry3.place(relx=0.383, rely=0.364, height=20, relwidth=0.275
-                , bordermode='ignore')
-        self.Entry3.configure(background="white")
-        self.Entry3.configure(font="TkFixedFont")
-        self.Entry3.configure(width=316)
+        #self.Entry3 = tk.Entry(self.Labelframe_moteur)
+        #self.Entry3.place(relx=0.383, rely=0.364, height=20, relwidth=0.275
+        #        , bordermode='ignore')
+        #self.Entry3.configure(background="white")
+        #self.Entry3.configure(font="TkFixedFont")
+        #self.Entry3.configure(width=316)
+
+        self.combo = Pmw.ComboBox(self.Labelframe_moteur, scrolledlist_items = self.faits_list)
+        self.combo.place(relx=0.383, rely=0.364, height=20, relwidth=0.275, bordermode='ignore')
 
         self.Label_but = tk.Label(self.Labelframe_moteur)
         self.Label_but.place(relx=0.339, rely=0.364, height=18, width=25
                 , bordermode='ignore')
-        self.Label_but.configure(text='''But''')
+        self.Label_but.configure(text='''But :''')
 
         self.Labelframe_resultat = tk.LabelFrame(top)
         self.Labelframe_resultat.place(relx=0.009, rely=0.5, relheight=0.442
@@ -225,11 +232,17 @@ class Toplevel1:
     def bouton_lancement_moteur(self):
         self.Text3.configure(state="normal")
         self.Text4.configure(state="normal")
-        self.Text3.delete(1.0, END)
-        self.Text4.delete(1.0, END)
+        self.Text3.delete(1.0, tk.END)
+        self.Text4.delete(1.0, tk.END)
+        b = self.combo.get()
+        but = None
+        for lb in self.liste_but:
+            if str(lb) == b:
+                but = lb
+
         if self.var_choix.get() == "avant":
             # print("lancement du chainage avant")
-            string = self.moteur.chainage_avant(self.liste_des_faits)
+            string = self.moteur.chainage_avant(self.liste_des_faits, but)
             self.Text3.configure(state="normal")
             self.Text3.insert(1.0, string)
             self.Text3.configure(state="disabled")
@@ -244,7 +257,7 @@ class Toplevel1:
 
         elif self.var_choix.get() == "arriere":
             # print("lancement du chainage arriere")
-            string = self.moteur.chainage_arriere(self.liste_des_faits)
+            string = self.moteur.chainage_arriere(self.liste_des_faits, but)
             self.Text3.configure(state="normal")
             self.Text3.insert(1.0, string)
             self.Text3.configure(state="disabled")
@@ -257,26 +270,19 @@ class Toplevel1:
             self.Text4.configure(state="disabled")
             self.liste_des_faits = recuperation_des_faits(self.Entry_faits.get())
         else:
-            # print("erreur")
-            # print("lancement du chainage arriere")
-            string = self.moteur.chainage_arriere(self.liste_des_faits)
             self.Text3.configure(state="normal")
-            self.Text3.insert(1.0, string)
+            self.Text3.insert(1.0, "Veuillez choisir un type de chainage")
             self.Text3.configure(state="disabled")
-            string = ""
-            for i, f in enumerate(self.liste_des_faits):
-                string += "Fait " + str(i) + "\n\t" + str(f) + "\n"
-
             self.Text4.configure(state="normal")
-            self.Text4.insert(1.0, string)
+            self.Text4.insert(1.0, "Veuillez choisir un type de chainage")
             self.Text4.configure(state="disabled")
             self.liste_des_faits = recuperation_des_faits(self.Entry_faits.get())
 
     def bouton_chargement_xml(self):
         self.Text_faits.configure(state="normal")
-        self.Text_faits.delete(1.0, END)
+        self.Text_faits.delete(1.0, tk.END)
         self.Text_regles.configure(state="normal")
-        self.Text_regles.delete(1.0, END)
+        self.Text_regles.delete(1.0, tk.END)
         self.moteur = creation_moteur(self.Entry_regles.get())
         self.liste_des_faits = recuperation_des_faits(self.Entry_faits.get())
         string = ""
@@ -284,12 +290,29 @@ class Toplevel1:
             string += "Fait " + str(i) + "\n\t" + str(f) + "\n"
 
         self.Text_faits.configure(state="normal")
-        self.Text_faits.insert(INSERT, string)
+        self.Text_faits.insert(tk.INSERT, string)
         self.Text_faits.configure(state="disabled")
         self.Text_regles.configure(state="normal")
-        self.Text_regles.insert(INSERT, str(self.moteur))
+        self.Text_regles.insert(tk.INSERT, str(self.moteur))
         self.Text_regles.configure(state="disabled")
 
+        self.liste_but = self.generation_but()
+
+        self.combo.destroy()
+        self.faits_list = [" "] + list(map(lambda f : str(f) , self.liste_but))
+        self.combo = Pmw.ComboBox(self.Labelframe_moteur, scrolledlist_items = self.faits_list)
+        self.combo.place(relx=0.383, rely=0.364, height=20, relwidth=0.275 , bordermode='ignore')
+
+    def generation_but(self):
+        liste_buts = []
+        for r in self.moteur.regles:
+            if not(r.conclusion in liste_buts):
+                liste_buts += [r.conclusion]
+            for c in r.conditions:
+                if c not in liste_buts:
+                    liste_buts += [c]
+
+        return liste_buts
 
     @staticmethod
     def popup1(event, *args, **kwargs):

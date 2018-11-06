@@ -27,7 +27,7 @@
 	</regle>
 	<regle>
 		<conditions>
-			<predicat nom="le chien peut sortir de la maison"/>
+			<predicat nom="le chien sort de la maison"/>
 		</conditions>
 		<conclusion>
 			<predicat nom="l'humeur du chien" operateur="=" valeur="heureux"/>
@@ -44,7 +44,7 @@
 	<regle>
 		<conditions>
 			<predicat nom="le facteur arrive"/>
-			<predicat nom="le chien peut sortir de la maison"/>
+			<predicat nom="le chien sort de la maison"/>
 		</conditions>
 		<conclusion>
 			<predicat nom="le facteur prend une balle"/>

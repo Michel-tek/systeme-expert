@@ -1,6 +1,15 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+
+def liste_2_comprise_dans_liste_1(l1,l2):
+    for a in l2:
+        if a in l1:
+            continue
+        else:
+            return False
+    return True
+
 class Predicat:
     """
     un predicat est composé d'un nom et éventuellement d'un opérateur et d'une valeur
@@ -120,10 +129,11 @@ class Moteur:
             modification = False
             for i, regle in enumerate(self.regles):
                 if not (appliquee[i]):
-                    # print("Est-il possible d'appliquer la regle " + str(i) + " : \n\t" + str(regle) + " ?")
+                    #print("Est-il possible d'appliquer la regle " + str(i) + " : \n\t" + str(regle) + " ?")
                     string += "\nEst-il possible d'appliquer la regle " + str(i) + " : \n\t" + str(regle) + " ?"
-                    if (list(filter(lambda fait: fait in regle.conditions, faits))) == regle.conditions:
+                    if  liste_2_comprise_dans_liste_1((list(filter(lambda fait: fait in regle.conditions, faits))), regle.conditions):
                         # print(Colors.OKGREEN +"\tOui!" + Colors.ENDC)
+                        #print("\tOui!")
                         string += "\n\tOui!"
                         modification = True
                         appliquee[i] = True
@@ -134,11 +144,12 @@ class Moteur:
                             return string + "\nl'ajout du dernier fait mène à une incohérence"
                     else:
                         # print(Colors.WARNING + "\tNon!" + Colors.ENDC)
+                        #print("\tNon!")
                         string += "\n\tNon!"
                 if modification:
                     break
         # print("fin du chainage avant")
-        string += "\nfin du chainage avant"
+        string += "\n\nfin du chainage avant"
         if but in faits:
             string += "\nLe but est atteint!"
 
@@ -188,9 +199,9 @@ class Moteur:
                 if modification:
                     break
         # print("fin du chainage arriere")
-        string += "fin du chainage arriere"
+        string += "\n\nfin du chainage arriere"
         if but in faits:
-            string += "Le but est atteint!"
+            string += "\nLe but est atteint!"
 
         return string
 
