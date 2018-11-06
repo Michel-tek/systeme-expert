@@ -39,12 +39,11 @@ Représentation :
 
 Les règles sont constituées de :
 
-	- une ou plusieurs conditions
-	
-		- la relation entre chaque prédicat dans les conditons est le ET, pour créer un OU il vous faudra créer une seconde règle avec la même conclusion.
-		
-	- une conclusion représentée par un prédicat
-	
+	- une ou plusieurs conditions,
+	- une conclusion représentée par un prédicat.
+
+La relation entre chaque prédicat dans les conditons est le ET, pour créer un OU il vous faudra créer une seconde règle avec la même conclusion.
+
 ## Le moteur
 
 Le moteur est généré par la fonction "creation_moteur" de xml_reader qui demande en paramètre le nom d'un fichier xml comportant les règles (dans le projet vous pouvez utiliser le fichier "regles_chien.xml")
