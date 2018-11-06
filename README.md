@@ -9,22 +9,25 @@ Vous aurez besoin du package Pmw pour lancer le programme (gestion du comboBox d
 ## Lancement du programme
 
 	./main.py
-
+### Chainage avant
 Si vous voulez tester avec le chainage avant : 
 
 	- cliquez sur "chargement des fichiers",
 	- puis selectionnez "avant",
 	- vous pouvez éventuellement choisir un but dans la liste,
 	- cliquez sur "lancement du moteur".
-
+### Chainge arrière
 Si vous voulez tester avec le chainage arrière : 
 	
-	- changez le texte "faits_chien_avant.xml" par "faits_chien_arriere.xml" (en principe le moteur fonctionne aussi avec le 1er fichier mais vous pourrez faire plus d'itérations avec ce fichier),
+	- changez le texte "faits_chien_avant.xml" par "faits_chien_arriere.xml" *,
 	- cliquez sur "chargement des fichiers",
 	- puis selectionnez "arrière",
 	- vous devez choisir un but dans la liste,
 	- cliquez sur "lancement du moteur".
 
+*(en principe le moteur fonctionne aussi avec le 1er fichier mais vous pourrez faire plus d'itérations avec le fichier "faits_chien_arriere.xml")
+
+### Cohérence
 Pour tester la gestion de la cohérence vous pouvez ajouter le prédicat :
 	
 	<predicat nom="l'humeur du chien" operateur="=" valeur="triste"/>
