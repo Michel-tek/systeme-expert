@@ -10,7 +10,13 @@ Ce projet est divisé en 3 parties principales :
 ### Les fichiers xml
 
 ### Faits
-
+Connexion  : http://localhost:8080/CahierLaboratoire/connexion
+    - Administrateur : 
+        - Mail : a@a.a
+        - Mot de passe : admin
+    - Utilisateur : 
+        - Mail : n@n.n
+        - Mot de passe : normal
 
 Le moteur possède une liste de règles, celles ci sont constituées de conditions et conclusion (liste de prédicats).
 Un prédicat est composé d'un nom et si besoin un opérateur et d'une valeur.
