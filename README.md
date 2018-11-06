@@ -1,4 +1,17 @@
-# systeme-expert
+# Système expert
+
+## Le projet
+
+	Ce projet est divisé en 3 parties principales, la gestion des fichiers xml, le moteur et l'interface graphique 
+
+### Les fichiers xml
+
+### Faits
+
+	les 
+
+Le moteur possède une liste de règles, celles ci sont constituées de conditions et conclusion (liste de prédicats).
+Un prédicat est composé d'un nom et si besoin un opérateur et d'une valeur.
 
 les infos suivantes ne sont ni bonnes ni à jour...
 
