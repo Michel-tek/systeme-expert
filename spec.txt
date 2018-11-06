@@ -1,4 +1,0 @@
-Activité : météo.
-
-Langage : Python.
-Syntaxe des faits et connaissances : XML.
