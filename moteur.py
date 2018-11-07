@@ -61,7 +61,9 @@ class Predicat:
 
 
 class Coherence:
-
+    """
+    classe représentant les incohérences entre plusieurs prédicats
+    """
     def __init__(self, liste_predicat):
         self.coherence = tuple(liste_predicat)
 
@@ -73,16 +75,11 @@ class Coherence:
 
 
 class Regle:
-
+    """
+    classe composée d'une liste de conditions et d'une conclusion
+    """
     def __init__(self, conditions, conclusion):
         self.conditions, self.conclusion = conditions, conclusion
-
-    # def __str__(self):
-    #     string = Colors.BOLD + "Si " + Colors.ENDC
-    #     for i, condition in enumerate(self.conditions):
-    #         string += ((Colors.BOLD + "et " + Colors.ENDC) if i >= 1 else "") + str(condition) + " "
-    #     string += Colors.BOLD + "Alors " + Colors.ENDC + str(self.conclusion)
-    #     return string
 
     def __str__(self):
         string = "Si "
@@ -93,6 +90,9 @@ class Regle:
 
 
 class Moteur:
+    """
+    classe utilisée pour gérer le chainage avant et arrière en fonction des regles et faits donnés
+    """
     def __init__(self, regles, coherences):
         self.regles = regles
         self. coherences = coherences
@@ -107,6 +107,71 @@ class Moteur:
                 string += str(c)
         return string
 
+    def chainage(self, faits, sens=True, ordre=True, but = None):
+        """
+        sens :
+                True : avant
+                False: arrière
+        ordre : 
+                True : parcours toutes les regles et les ajoute à la fin des regles a traiter si elles sont applicables
+                False: parcours de la même manière mais ajoute les règles plus récentes au début
+        """
+        string =""
+        if self.test_coherence(faits):
+            return "Il y a une incohérence dans les faits de base"
+        if but:
+            # print("\nVoici notre but : \n\t" + str(but) + "\n")
+            string += "\nVoici notre but : \n\t" + str(but) + "\n"
+        elif not sens:
+            return "Il vous faut un but pour le chainage arrière"
+        # print("Partons des faits de base suivant :")
+        string += "Partons des faits de base suivant :\n"
+        for i, f in enumerate(faits):
+            # print("\t\t" + str(i) + " - " + str(f))
+            string += "\n\t\t" + str(i) + " - " + str(f)
+        # print("")
+        string += "\n"
+
+        appliquee = [False] * len(self.regles)
+        modification = True
+        regles_a_appliquer = []
+        while modification and (list(filter(lambda r: r is False, appliquee)) != []) and (
+                but is None or not (but in faits)):
+            modification = False
+            for i, regle in enumerate(self.regles):
+                if not (appliquee[i]):
+                    string += "\nEst-il possible d'appliquer la regle " + str(i) + " : \n\t" + str(regle) + " ?"
+                    if  (liste_2_comprise_dans_liste_1((list(filter(lambda fait: fait in regle.conditions, faits))), regle.conditions) if sens else (regle.conclusion in faits)  ):
+                        string += "\n\tOui!"
+                        modification = True
+                        appliquee[i] = True
+                        if ordre:
+                            regles_a_appliquer.append(regle)
+                        else:
+                            regles_a_appliquer.insert(0,regle)
+                        string += "\n\tAjout de la regle " + str(regle) + " à la liste des regles a appliquer"
+                    else:
+                        string += "\n\tNon!"
+            if regles_a_appliquer != []:
+                modification = True
+                if sens:
+                    faits.append(regles_a_appliquer[0].conclusion)
+                    string += "\nAjout du fait " + str(regles_a_appliquer[0].conclusion) + " à la liste des faits"
+                    del regles_a_appliquer[0]
+                    if self.test_coherence(faits):
+                        return string + "\nl'ajout du dernier fait mène à une incohérence"
+                else:
+                    for c in regles_a_appliquer[0].conditions:
+                        faits.append(c)
+                        string += "\nAjout du fait " + str(c) + " à la liste des faits"
+                        if self.test_coherence(faits):
+                            return string + "\nl'ajout du dernier fait mène à une incohérence"
+                    del regles_a_appliquer[0]
+        string += "\n\nfin du chainage!"
+        if but in faits:
+            string += "\nLe but est atteint!"
+
+        return string
     def chainage_avant(self, faits, but=None):
         string =""
         if self.test_coherence(faits):

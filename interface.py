@@ -61,6 +61,15 @@ class Toplevel1:
         top.geometry("1174x780+378+123")
         top.title("Moteur d'inférence")
 
+        self.possibilite_chainage = [
+            "chainage avant, application des règles dans le sens du fichier xml",
+            "chainage arrière, application des règles dans le sens du fichier xml",
+            "chainage avant, application des règles les plus récentes",
+            "chainage arrière, application des règles les plus récentes",
+            "chainage avant, application des règles les plus anciennes",
+            "chainage arrière, application des règles les plus anciennes"
+        ]
+
         self.moteur = creation_moteur("regles_chien.xml")
         self.liste_des_faits = recuperation_des_faits("faits_chien_avant.xml")
         self.liste_but = self.generation_but()
@@ -162,24 +171,27 @@ class Toplevel1:
         self.Button2.configure(command=self.bouton_lancement_moteur)
         self.Button2.configure(width=237)
 
-        self.var_choix = tk.StringVar()
-        self.Radiobutton_avant = tk.Radiobutton(self.Labelframe_moteur)
-        self.Radiobutton_avant.place(relx=0.052, rely=0.364, relheight=0.364
-                , relwidth=0.055, bordermode='ignore')
-        self.Radiobutton_avant.configure(activebackground="#d9d9d9")
-        self.Radiobutton_avant.configure(justify='left')
-        self.Radiobutton_avant.configure(text='''Avant''')
-        self.Radiobutton_avant.configure(variable=self.var_choix)
-        self.Radiobutton_avant.configure(value="avant")
+        #self.var_choix = tk.StringVar()
+        #self.Radiobutton_avant = tk.Radiobutton(self.Labelframe_moteur)
+        #self.Radiobutton_avant.place(relx=0.052, rely=0.364, relheight=0.364
+        #        , relwidth=0.055, bordermode='ignore')
+        #self.Radiobutton_avant.configure(activebackground="#d9d9d9")
+        #self.Radiobutton_avant.configure(justify='left')
+        #self.Radiobutton_avant.configure(text='''Avant''')
+        #self.Radiobutton_avant.configure(variable=self.var_choix)
+        #self.Radiobutton_avant.configure(value="avant")
 
-        self.Radiobutton_arriere = tk.Radiobutton(self.Labelframe_moteur)
-        self.Radiobutton_arriere.place(relx=0.157, rely=0.364, relheight=0.364
-                , relwidth=0.059, bordermode='ignore')
-        self.Radiobutton_arriere.configure(activebackground="#d9d9d9")
-        self.Radiobutton_arriere.configure(justify='left')
-        self.Radiobutton_arriere.configure(text='''Arrière''')
-        self.Radiobutton_arriere.configure(variable=self.var_choix)
-        self.Radiobutton_arriere.configure(value="arriere")
+        #self.Radiobutton_arriere = tk.Radiobutton(self.Labelframe_moteur)
+        #self.Radiobutton_arriere.place(relx=0.157, rely=0.364, relheight=0.364
+        #        , relwidth=0.059, bordermode='ignore')
+        #self.Radiobutton_arriere.configure(activebackground="#d9d9d9")
+        #self.Radiobutton_arriere.configure(justify='left')
+        #self.Radiobutton_arriere.configure(text='''Arrière''')
+        #self.Radiobutton_arriere.configure(variable=self.var_choix)
+        #self.Radiobutton_arriere.configure(value="arriere")
+
+        self.combo_chaine = Pmw.ComboBox(self.Labelframe_moteur, scrolledlist_items = self.possibilite_chainage)
+        self.combo_chaine.place(relx=0.01, rely=0.364, relwidth=0.33, bordermode='ignore')
 
         #self.Entry3 = tk.Entry(self.Labelframe_moteur)
         #self.Entry3.place(relx=0.383, rely=0.364, height=20, relwidth=0.275
@@ -189,12 +201,12 @@ class Toplevel1:
         #self.Entry3.configure(width=316)
 
         self.combo = Pmw.ComboBox(self.Labelframe_moteur, scrolledlist_items = self.faits_list)
-        self.combo.place(relx=0.383, rely=0.364, height=20, relwidth=0.275, bordermode='ignore')
+        self.combo.place(relx=0.383, rely=0.364, height=20, relwidth=0.35, bordermode='ignore')
 
         self.Label_but = tk.Label(self.Labelframe_moteur)
-        self.Label_but.place(relx=0.339, rely=0.364, height=18, width=25
+        self.Label_but.place(relx=0.35, rely=0.364, height=18, width=25
                 , bordermode='ignore')
-        self.Label_but.configure(text='''But :''')
+        self.Label_but.configure(text=''' But ''')
 
         self.Labelframe_resultat = tk.LabelFrame(top)
         self.Labelframe_resultat.place(relx=0.009, rely=0.5, relheight=0.442
@@ -230,53 +242,85 @@ class Toplevel1:
         self.Button_quitter.configure(text='''Quitter''')
 
     def bouton_lancement_moteur(self):
-        self.Text3.configure(state="normal")
-        self.Text4.configure(state="normal")
-        self.Text3.delete(1.0, tk.END)
-        self.Text4.delete(1.0, tk.END)
+        self.del_text(self.Text3)
+        self.del_text(self.Text4)
+
         b = self.combo.get()
         but = None
         for lb in self.liste_but:
             if str(lb) == b:
                 but = lb
 
-        if self.var_choix.get() == "avant":
-            # print("lancement du chainage avant")
+
+        if self.combo_chaine.get() == self.possibilite_chainage[0]:
             string = self.moteur.chainage_avant(self.liste_des_faits, but)
-            self.Text3.configure(state="normal")
-            self.Text3.insert(1.0, string)
-            self.Text3.configure(state="disabled")
+            self.set_text(self.Text3,string)
             string = ""
             for i, f in enumerate(self.liste_des_faits):
                 string += "Fait " + str(i) + "\n\t" + str(f) + "\n"
-
-            self.Text4.configure(state="normal")
-            self.Text4.insert(1.0, string)
-            self.Text4.configure(state="disabled")
+            self.set_text(self.Text4,string)
             self.liste_des_faits = recuperation_des_faits(self.Entry_faits.get())
 
-        elif self.var_choix.get() == "arriere":
-            # print("lancement du chainage arriere")
+        elif self.combo_chaine.get() == self.possibilite_chainage[1]:
             string = self.moteur.chainage_arriere(self.liste_des_faits, but)
-            self.Text3.configure(state="normal")
-            self.Text3.insert(1.0, string)
-            self.Text3.configure(state="disabled")
+            self.set_text(self.Text3,string)
             string = ""
             for i, f in enumerate(self.liste_des_faits):
                 string += "Fait " + str(i) + "\n\t" + str(f) + "\n"
+            self.set_text(self.Text4,string)
+            self.liste_des_faits = recuperation_des_faits(self.Entry_faits.get())
 
-            self.Text4.configure(state="normal")
-            self.Text4.insert(1.0, string)
-            self.Text4.configure(state="disabled")
+        elif self.combo_chaine.get() == self.possibilite_chainage[2]:
+            string = self.moteur.chainage(self.liste_des_faits, True , False , but)
+            self.set_text(self.Text3,string)
+            string = ""
+            for i, f in enumerate(self.liste_des_faits):
+                string += "Fait " + str(i) + "\n\t" + str(f) + "\n"
+            self.set_text(self.Text4,string)
             self.liste_des_faits = recuperation_des_faits(self.Entry_faits.get())
+
+        elif self.combo_chaine.get() == self.possibilite_chainage[3]:
+            string = self.moteur.chainage(self.liste_des_faits, False , False , but)
+            self.set_text(self.Text3,string)
+            string = ""
+            for i, f in enumerate(self.liste_des_faits):
+                string += "Fait " + str(i) + "\n\t" + str(f) + "\n"
+            self.set_text(self.Text4,string)
+            self.liste_des_faits = recuperation_des_faits(self.Entry_faits.get())
+
+        elif self.combo_chaine.get() == self.possibilite_chainage[4]:
+            string = self.moteur.chainage(self.liste_des_faits, True , True , but)
+            self.set_text(self.Text3,string)
+            string = ""
+            for i, f in enumerate(self.liste_des_faits):
+                string += "Fait " + str(i) + "\n\t" + str(f) + "\n"
+            self.set_text(self.Text4,string)
+            self.liste_des_faits = recuperation_des_faits(self.Entry_faits.get())
+
+        elif self.combo_chaine.get() == self.possibilite_chainage[5]:
+            string = self.moteur.chainage(self.liste_des_faits, False , True , but)
+            self.set_text(self.Text3,string)
+            string = ""
+            for i, f in enumerate(self.liste_des_faits):
+                string += "Fait " + str(i) + "\n\t" + str(f) + "\n"
+            self.set_text(self.Text4,string)
+            self.liste_des_faits = recuperation_des_faits(self.Entry_faits.get())
+
         else:
-            self.Text3.configure(state="normal")
-            self.Text3.insert(1.0, "Veuillez choisir un type de chainage")
-            self.Text3.configure(state="disabled")
-            self.Text4.configure(state="normal")
-            self.Text4.insert(1.0, "Veuillez choisir un type de chainage")
-            self.Text4.configure(state="disabled")
+            self.set_text(self.Text3,"Veuillez choisir un type de chainage")
+            self.set_text(self.Text4,"Veuillez choisir un type de chainage")
             self.liste_des_faits = recuperation_des_faits(self.Entry_faits.get())
+
+    def set_text(self, zdt, text):
+        zdt.configure(state="normal")
+        zdt.insert(1.0, text)
+        zdt.configure(state="normal")
+
+    def del_text(self,zdt):
+        zdt.configure(state="normal")
+        zdt.delete(1.0, tk.END)
+        zdt.configure(state="normal")
+
 
     def bouton_chargement_xml(self):
         self.Text_faits.configure(state="normal")
