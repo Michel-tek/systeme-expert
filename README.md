@@ -2,18 +2,20 @@
 
 ### Info
 
-Vous aurez besoin du package Pmw pour lancer le programme (gestion du comboBox dans l'interface graphique)
+Vous aurez besoin du package Pmw pour lancer le programme (gestion du comboBox dans l'interface graphique) ainsi que de lxml (gestion des fichiers xml)
 
 	pip install Pmw
+	sudo apt-get install python3-lxml
 
 ## Lancement du programme
 
 	./main.py
+
 ### Chainage avant
 Si vous voulez tester avec le chainage avant : 
 
 	- cliquez sur "chargement des fichiers",
-	- puis selectionnez "avant",
+	- puis selectionnez un chainage avant parmi les possibilitées de chainages,
 	- vous pouvez éventuellement choisir un but dans la liste,
 	- cliquez sur "lancement du moteur".
 ### Chainge arrière
@@ -21,7 +23,7 @@ Si vous voulez tester avec le chainage arrière :
 	
 	- changez le texte "faits_chien_avant.xml" par "faits_chien_arriere.xml" *,
 	- cliquez sur "chargement des fichiers",
-	- puis selectionnez "arrière",
+	- puis selectionnez un chainage arrière parmi les possibilitées de chainages,
 	- vous devez choisir un but dans la liste,
 	- cliquez sur "lancement du moteur".
 
@@ -104,8 +106,22 @@ Le fonctionnement est le même que pour le chainage avant, la fonction à utilis
 
 Vous pouvez utiliser le fichier "faits_chien_arriere.xml" pour tester.
 
+### Chainage en fonction de l'ordre d'application des règles
+
+La fonction "chainage" du moteur permet de réaliser le chainage avant ou arrière avec le choix d'appliquer les règles dans l'ordre le plus récent ou l'ordre le plus ancien.
+	
+	chainage(self, faits, sens=True, ordre=True, but = None):
+        """
+        sens :
+                True : avant
+                False: arrière
+        ordre : 
+                True : parcours toutes les regles et les ajoute à la fin des regles a traiter si elles sont applicables
+                False: parcours de la même manière mais ajoute les règles applicables plus récentes au début
+        """
+
 ## L'interface graphique
 
 L'interface graphique, généree en grande partie avec PAGE (http://page.sourceforge.net/), affiche les règles et les faits après les avoir renseigné dans les champs correspondant et avoir cliqué sur "chargement des fichiers".
 
-Vous devez ensuite choisir entre chainage avant ou arrière et renseigner un but, le clic sur Lancement du moteur gérera l'execution de celui ci et affichera le déroulement de l'algorithme sur la gauche et les faits sur la droite
+Vous devez ensuite choisir parmi les différentes possibilitées de chainage avant ou arrière et renseigner un but, le clic sur Lancement du moteur gérera l'execution de celui ci et affichera le déroulement de l'algorithme sur la gauche et les faits finaux sur la droite
