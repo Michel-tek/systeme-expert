@@ -2,6 +2,8 @@
 
 ### Info
 
+La version de Python utilisée est la 3.
+
 Vous aurez besoin du package Pmw pour lancer le programme (gestion du comboBox dans l'interface graphique) ainsi que de lxml (gestion des fichiers xml)
 
 	pip install Pmw
