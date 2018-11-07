@@ -96,6 +96,8 @@ La relation entre chaque prédicat dans les conditons est le ET, pour créer un 
 
 Le moteur est généré par la fonction "creation_moteur" de xml_reader qui demande en paramètre le nom d'un fichier xml comportant les règles (dans le projet vous pouvez utiliser le fichier "regles_chien.xml")
 
+Pour le traitement des règles, la complexité d'évaluation des prémisses et les règles ayant le plus de prémisses à satisfaire ne sont pas vérifiées car le contrôle de chaque règle prendrai plus de temps que de prendre les règles une par une dans le sens du fichier xml.  Et la récence d'utilisation de la règle n'est pas contrôlée non plus car pour éviter de boucler chaque règle n'est utilisée qu'une seule fois (ceci est valable pour un moteur d'ordre 0 ou 0+ mais ne serait plus applicable sur de l'ordre 1 étant donné que les valeurs peuvent être incrémentées ou modifiées)
+
 ### Chainage avant
 
 Le chainage avant correspond à la fonction "chainage_avant" du moteur qui demande une liste de faits de départ et éventuellement un but (le but doit être de type Predicat (de moteur.py) et non simplement une chaine de caractère).
