@@ -29,6 +29,8 @@ Si vous voulez tester avec le chainage arrière :
 
 *(en principe le moteur fonctionne aussi avec le 1er fichier mais vous pourrez faire plus d'itérations avec le fichier "faits_chien_arriere.xml")
 
+Pour information, lors du chainage arrière, si le but se trouve dans une règle avec plus d'une condition, vous trouverez toutes les conditions de la règle dans la liste des faits finaux (le but ne se retrouverait donc pas à être le dernier fait de la liste de faits)
+
 ### Cohérence
 Pour tester la gestion de la cohérence vous pouvez ajouter le prédicat :
 	
